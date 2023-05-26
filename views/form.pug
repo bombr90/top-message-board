@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  <form method="POST" action="/new">
+    h1 Submit a message!
+    p Please enter your name and message 
+    label(
+      for='author'
+    )
+      | Author: 
+    input(
+      id='author'
+      type='text'
+      name='author'
+      value=''
+      placeholder='Your name'
+      required=true
+    ) 
+    label(
+      for='message'
+    )
+      | Message: 
+    textarea(
+      id='message'
+      rows="6"
+      type='text'
+      name='message'
+      value=''
+      placeholder='Your message'
+      required=true
+    )
+    button(
+      type='submit'
+    )
+      | Submit
+  </form>
+  a(href="/") 
+    button
+      | Return Home

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  
+  div(class='cardDeck')
+    each message in messages
+      div(class='card')
+        div(class='bold small') Posted #{message.added}
+        div(class='italic') #{message.user} says:
+        div #{message.text}
+  a(href="./new")
+    button
+      | Post new message
