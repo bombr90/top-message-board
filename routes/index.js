@@ -1,21 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date(),
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const Message = require('./../models/Message')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async (req, res, next) => {
+  const messages = await Message.find();
   res.render('index', { 
     title: 'Mini Messageboard', 
     messages: messages 
@@ -28,12 +17,13 @@ router.get('/new', (req,res,next) => {
 });
 
 // Post new message
-router.post('/new', (req,res,next) => {
-  messages.push({ 
-    text: req.body.message, 
-    user: req.body.author, 
-    added: new Date(), 
+router.post('/new', async (req,res,next) => {
+  const message = new Message({
+    user: req.body.author,
+    text: req.body.message,
+    added: new Date(),
   });
+  await message.save();
   res.redirect('/');
 });
 
